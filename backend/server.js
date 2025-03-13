@@ -56,5 +56,5 @@ app.delete("/expenses/:id", async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`🚀 Server running on PORT ${PORT}`));
