@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const API_URL = "https://expense-manager-new-backend.onrender.com/";
+const API_URL = "http://localhost:5002";
 
 function App() {
     const [expenses, setExpenses] = useState([]);
