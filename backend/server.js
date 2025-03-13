@@ -9,16 +9,18 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connect to MongoDB (with error handling for connection failure)
-const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/expenseDB";
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+// Connect to MongoDB
+const mongoURI = process.env.MONGO_URI;
+if (!mongoURI) {
+  console.error("❌ MongoDB URI is missing! Set MONGO_URI in your .env file.");
+  process.exit(1);
+}
+
+mongoose.connect(mongoURI)
   .then(() => console.log("✅ MongoDB Connected..."))
   .catch((err) => {
     console.error("❌ MongoDB Connection Error:", err);
-    process.exit(1); // Stop the app if DB connection fails
+    process.exit(1);
   });
 
 // Expense Schema
@@ -69,5 +71,5 @@ app.delete("/expenses/:id", async (req, res) => {
 // Start the server
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server is running on port ${PORT}...`);
+  console.log(`🚀 Server is running on port ${PORT}...`);
 });
